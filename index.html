@@ -1,357 +1,130 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaurav Garg - Intro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Tanuj Garg | Portfolio</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
         }
-
-
-        body, button {
-            font-family: "Poppins", sans-serif;
-        }
-
-
+        
         body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000 100%);
-            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            margin: 0;
             overflow-x: hidden;
-            transform-style: preserve-3d;
         }
 
-
-        .container {
-            min-height: 100vh;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-
-        .navbar {
+        /* 3D Moving Background Effect */
+        .bg-gradient {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 10;
-            height: 4rem;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-
-        .menu {
-            max-width: 80rem;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            z-index: -1;
         }
 
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-        }
-
-
-        .hamburger-menu {
-            height: 4rem;
-            width: 3rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-
-        .bar {
-            width: 2rem;
-            height: 2px;
-            border-radius: 2px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            transition: 0.5s;
-            position: relative;
-        }
-
-
-        .bar:before,
-        .bar:after {
-            content: "";
-            position: absolute;
-            width: inherit;
-            height: inherit;
-            background: inherit;
-            transition: 0.5s;
-        }
-
-
-        .bar:before {
-            transform: translateY(-8px);
-        }
-
-
-        .bar:after {
-            transform: translateY(8px);
-        }
-
-
-        .main {
-            position: relative;
-            width: 100%;
-            z-index: 5;
-            transform-origin: left;
-            transition: 0.5s;
-            padding-top: 4rem;
-        }
-
-
-        header {
-            min-height: 100vh;
-            width: 100%;
-            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-
-        .overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(1px);
-        }
-
-
-        .inner {
-            max-width: 40rem;
-            text-align: center;
-            padding: 0 2rem;
-            transform-style: preserve-3d;
-        }
-
-
-        .title {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px #00ffff; }
-            to { text-shadow: 0 0 30px #ff00ff, 0 0 40px #00ff00; }
-        }
-
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-
-        .btn {
-            padding: 1rem 2.5rem;
-            background: linear-gradient(45deg, #ff00ff, #00ff00);
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
-        }
-
-
-        .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.4);
-        }
-
-
-        /* 3D Active States */
-        .container.active .bar {
-            transform: rotate(360deg);
-            background: transparent;
-        }
-
-
-        .container.active .bar:before {
-            transform: translateY(0) rotate(45deg);
-        }
-
-
-        .container.active .bar:after {
-            transform: translateY(0) rotate(-45deg);
-        }
-
-
-        .container.active .main {
-            animation: main-animation 0.6s ease;
-            transform: perspective(1200px) rotateY(-15deg) translateZ(200px) scale(0.8);
-            cursor: grab;
-        }
-
-
-        @keyframes main-animation {
-            from { transform: translateX(0); }
-            to { transform: perspective(1200px) rotateY(-15deg) translateZ(200px) scale(0.8); }
-        }
-
-
-        .container.active .main:hover {
-            transform: perspective(1200px) rotateY(-20deg) translateZ(250px) scale(0.85);
-        }
-
-
-        /* Side Menu Links */
-        .links {
-            position: fixed;
-            width: 25%;
-            right: -25%;
-            top: 0;
+        section {
             height: 100vh;
-            z-index: 2;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            transition: right 0.5s ease;
+            padding: 20px;
+            text-align: center;
         }
 
-
-        .container.active .links {
-            right: 0;
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-
-        .links ul {
-            list-style: none;
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.3s;
         }
 
-
-        .links li {
-            margin: 1rem 0;
+        .card:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+            border-color: var(--primary);
         }
 
-
-        .links a {
-            text-decoration: none;
-            display: block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
-            color: #fff;
-            font-weight: 400;
-            border-radius: 10px;
-            transition: 0.3s;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideIn 0.5s forwards ease;
-        }
-
-
-        .links a:nth-child(1) { animation-delay: 0.1s; }
-        .links a:nth-child(2) { animation-delay: 0.2s; }
-        .links a:nth-child(3) { animation-delay: 0.3s; }
-        .links a:nth-child(4) { animation-delay: 0.4s; }
-
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-
-        .links a:hover {
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            transform: translateX(10px) scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-        }
-
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .title { font-size: 2rem; }
-            .links { width: 80%; right: -80%; }
-            .container.active .main { transform: perspective(800px) rotateY(-10deg) translateZ(100px) scale(0.9); }
+        .badge {
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="navbar">
-            <div class="menu">
-                <h3 class="logo">Gaurav Garg</h3>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                </div>
+
+    <div class="bg-gradient"></div>
+
+    <section class="hero">
+        <div data-aos="zoom-out-up">
+            <h1>TANUJ GARG</h1>
+            <p style="font-size: 1.5rem; color: #94a3b8;">Aspiring Professional | Academic Achiever</p>
+        </div>
+    </section>
+
+    <section>
+        <h2 data-aos="fade-right">Academic Excellence</h2>
+        <div class="card" data-aos="flip-left">
+            <h3>Class 12th Graduate</h3>
+            <p>Completed with a focus on core disciplines and analytical thinking.</p>
+            <hr style="border: 0.5px solid #334155;">
+            <h3>Class 10th | Secondary Education</h3>
+            <p>Achieved a distinguished <span class="badge">90% Score</span></p>
+        </div>
+    </section>
+
+    <section>
+        <h2 data-aos="fade-up">Skills & Strengths</h2>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h4>Analytical Thinking</h4>
+                <p>Strong problem-solving skills developed through rigorous academic study.</p>
             </div>
-            <div class="links">
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#interests">Interests</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h4>Digital Literacy</h4>
+                <p>Proficient in modern productivity tools and tech-savvy approach.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <h4>Leadership</h4>
+                <p>Active participation in school events and team-based projects.</p>
             </div>
         </div>
+    </section>
 
-
-        <div class="main">
-            <header>
-                <div class="overlay">
-                    <div class="inner">
-                        <h2 class="title">Hi, I'm Gaurav Garg</h2>
-                        <p class="subtitle">Fresher from Bhiwāni, Haryana | Job seeker in IT/ITeS | Passionate about career growth, culture, math & streaming</p>
-                        <button class="btn" onclick="alert('Connect on LinkedIn or email!')">Get in Touch</button>
-                    </div>
-                </div>
-            </header>
+    <section>
+        <div class="card" data-aos="zoom-in">
+            <h2>Let's Connect</h2>
+            <p>I am currently looking for opportunities to grow and contribute.</p>
+            <p>Email: tanuj.garg@email.com</p> <button style="padding: 10px 30px; border-radius: 10px; border: none; background: #fff; cursor: pointer; font-weight: bold;">Download CV</button>
         </div>
-    </div>
+    </section>
 
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const hamburger_menu = document.querySelector(".hamburger-menu");
-        const container = document.querySelector(".container");
-        const links = document.querySelector(".links");
-
-
-        hamburger_menu.addEventListener("click", () => {
-            container.classList.toggle("active");
+        AOS.init({
+            duration: 1000,
+            once: false,
         });
     </script>
 </body>
